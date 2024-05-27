@@ -28,8 +28,6 @@ var schedulePartRanges map[string][2]int = map[string][2]int{
 // ParseSchedule converts a schedule string into its possible date/time component options
 func ParseSchedule(schedule string) (map[string][]int, error) {
 	scheduleComponents := strings.Fields(strings.TrimSpace(schedule))
-	fmt.Println("schedule is", schedule)
-	fmt.Printf("schedule components are %v", scheduleComponents)
 
 	if len(scheduleComponents) != scheduleComponentsSize {
 		return nil, fmt.Errorf("Invalid schedule components size. Expected %v components for the cron schedule", scheduleComponentsSize)
@@ -103,7 +101,6 @@ func ParseSchedule(schedule string) (map[string][]int, error) {
 		}
 	}
 
-	fmt.Println("result is", result)
 	return result, nil
 }
 
