@@ -8,6 +8,7 @@ import (
 )
 
 func TestNext(t *testing.T) {
+	now := time.Now()
 	type args struct {
 		from     time.Time
 		schedule string
@@ -26,6 +27,15 @@ func TestNext(t *testing.T) {
 				schedule: "* *  * * *",
 			},
 			want:    time.Date(time.Now().Year(), time.Now().Month(), time.Now().Day(), time.Now().Hour(), time.Now().Minute()+1, 0, 0, time.Local),
+			wantErr: false,
+		}, // * 0/12 * * *
+		{
+			name: "every 12 hours",
+			args: args{
+				from:     time.Date(now.Year(), now.Month(), 27, 23, 22, 0, 0, time.Local),
+				schedule: "* 0/12  * * *",
+			},
+			want:    time.Date(time.Now().Year(), time.Now().Month(), 28, 0, 0, 0, 0, time.Local),
 			wantErr: false,
 		},
 	}
